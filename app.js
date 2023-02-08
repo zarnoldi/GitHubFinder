@@ -18,29 +18,28 @@ if (searchText != null) {
     // Make http call to github to get Users
     github.getUsers(searchText)
     .then( (data) => {
+
+    console.log(data.profile.message);
+
+    if (data.profile.message != 'Not Found' || data.profile.messagete.includes('limit')) {
     // Construct Profile UI object
+    console.log('this gets run');
     const userUI = new UI(data.profile.login, data.profile.bio, data.profile.url, data.profile.name);
     // Create profile UI
     userUI.userProfileDisplay();
-
     // loop through array of repos
     data.repo.forEach(repo => {
-    
     // Construct repo UI Object
     const repoUI = new RepoUI(repo.owner.login, repo.name, repo.description, repo.updated_at, repo.created_at); 
-    
     // Create repo UI element
     repoUI.RepoDisplay(); 
-    });
+    })}else{
+        const errorMessage = new UI; 
+        errorMessage.userNotFound(); 
+    };
     })
-    .catch(error => console.log(error));
+    .catch((error) => {
+        console.log(error);
+    });
 } 
 })
-
-// Add search text
-// Get search text 
-// Add search text to API call
-// Make API call 
-// return results data
-// pass results to UI class
-// use results data to generate HTML elements 

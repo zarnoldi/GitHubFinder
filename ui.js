@@ -1,5 +1,4 @@
 // Create UI class for building different UI elements 
-
 export class UI {
     constructor(login, bio, url, name){
         this.login = login;
@@ -26,8 +25,17 @@ export class UI {
         `
         document.getElementById('profile').appendChild(userProfileCard);
     }
-}
 
+    userNotFound(){
+        let userNotFoundAlert = document.createElement('div'); 
+        userNotFoundAlert.className = 'alert alert-dismissible alert-danger text-white mb-2'; 
+        userNotFoundAlert.innerHTML = `
+        <strong>No user was found </strong>
+        `
+        document.getElementById('profile').appendChild(userNotFoundAlert);
+    }
+
+}
 
 export class RepoUI {
     constructor(repoOwner, repoName, repoDescription, repoLastUpdated, repoCreated){
